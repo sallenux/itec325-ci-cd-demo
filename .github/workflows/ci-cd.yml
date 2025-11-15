@@ -28,6 +28,9 @@ jobs:
           echo "Running basic HTML validation..."
           test -f index.html && echo "✔ index.html found"
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -39,10 +42,10 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: ${{ steps.deploy_staging.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages (Staging)
-        id: deploy_staging
+        id: deployment
         uses: actions/deploy-pages@v4
 
   deploy_production:
@@ -51,8 +54,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: ${{ steps.deploy_production.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages (Production)
-        id: deploy_production
+        id: deployment
         uses: actions/deploy-pages@v4
