@@ -7,13 +7,11 @@ on:
     branches: [ "staging", "main" ]
   workflow_dispatch:
 
-# 👇 ADD THESE PERMISSIONS at the top level (not inside jobs)
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 👇 ADD THIS CONCURRENCY SETTING
 concurrency:
   group: "pages"
   cancel-in-progress: true
